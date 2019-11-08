@@ -8,15 +8,32 @@ import AppColors from '../theme/colors';
 const Router = createAppContainer(
   createStackNavigator(
     {
-      ListOffers,
-      OfferDetails,
-      Checkout,
+      List: {
+        screen: ListOffers,
+        navigationOptions: {
+          title: 'Opções',
+        },
+      },
+      Details: {
+        screen: OfferDetails,
+        navigationOptions: {
+          title: 'Detalhes',
+        },
+      },
+      Checkout: {
+        screen: Checkout,
+        navigationOptions: {
+          title: 'Pagamento',
+        },
+      },
     },
     {
       defaultNavigationOptions: {
         headerStyle: {
           backgroundColor: AppColors.secondary,
-          height: 45,
+          height: 40,
+          borderBottomWidth: 1,
+          borderBottomColor: AppColors.primary,
         },
         headerTintColor: AppColors.light,
       },
