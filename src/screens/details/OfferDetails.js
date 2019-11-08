@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View, FlatList, Image} from 'react-native';
-import useFetch from '../../service/useFetch';
+import {FlatList, Image, View} from 'react-native';
 import Loader from '../../components/Loader';
+import useFetch from '../../service/useFetch';
 import AppColors from '../../theme/colors';
-import {CardText} from '../../components/ProductItemCard/styles';
+import {DescriptionText, DetailsContainer, CategoryText} from './styles';
 
 const OfferDetails = ({navigation}) => {
   const offerId = navigation.state.params.id;
@@ -27,7 +27,10 @@ const OfferDetails = ({navigation}) => {
             )}
             horizontal
           />
-          <CardText>{data.title}</CardText>
+          <DetailsContainer>
+            <CategoryText> {data.category}</CategoryText>
+            <DescriptionText>{data.title}</DescriptionText>
+          </DetailsContainer>
         </>
       )}
     </View>
