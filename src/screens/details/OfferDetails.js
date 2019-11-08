@@ -1,11 +1,16 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {Text, View} from 'react-native';
+import useFetch from '../../service/useFetch';
+import Loader from '../../components/Loader';
 
 const OfferDetails = ({navigation}) => {
+  const offerId = navigation.state.params.id;
+  const {data, isLoadding, error} = useFetch(`offer/${offerId}`);
+
   return (
     <View>
-      <Text>OfferDetails</Text>
-      <Button title="Comprar" onPress={() => navigation.navigate('Checkout')} />
+      {isLoadding && <Loader />}
+      {data && <Text>{data.title}</Text>}
     </View>
   );
 };

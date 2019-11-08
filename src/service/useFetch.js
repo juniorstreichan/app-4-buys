@@ -9,6 +9,7 @@ export default function useFetch(path = '') {
   useEffect(() => {
     if (path) {
       try {
+        setError(null);
         setIsLoadding(true);
         (async () => {
           const request = await api.get(path);
@@ -20,11 +21,6 @@ export default function useFetch(path = '') {
         setIsLoadding(false);
       }
     }
-    return () => {
-      setData(null);
-      setError(null);
-      setIsLoadding(false);
-    };
   }, [path]);
 
   return {
