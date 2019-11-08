@@ -8,18 +8,19 @@ export default function useFetch(path = '') {
 
   useEffect(() => {
     if (path) {
-      try {
-        setError(null);
-        setIsLoadding(true);
-        (async () => {
+      (async () => {
+        try {
+          setError(null);
+          setIsLoadding(true);
+
           const request = await api.get(path);
           setData(request.data);
-        })();
-      } catch (e) {
-        setError(e);
-      } finally {
-        setIsLoadding(false);
-      }
+        } catch (e) {
+          setError(e);
+        } finally {
+          setIsLoadding(false);
+        }
+      })();
     }
   }, [path]);
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, FlatList, Image} from 'react-native';
 import useFetch from '../../service/useFetch';
 import Loader from '../../components/Loader';
+import AppColors from '../../theme/colors';
+import {CardText} from '../../components/ProductItemCard/styles';
 
 const OfferDetails = ({navigation}) => {
   const offerId = navigation.state.params.id;
@@ -10,7 +12,24 @@ const OfferDetails = ({navigation}) => {
   return (
     <View>
       {isLoadding && <Loader />}
-      {data && <Text>{data.title}</Text>}
+
+      {data && (
+        <>
+          <FlatList
+            contentContainerStyle={{backgroundColor: AppColors.primary}}
+            data={data.images}
+            keyExtractor={(item, index) => `OfferDetails-${index}`}
+            renderItem={({item}) => (
+              <Image
+                source={{uri: item.url}}
+                style={{width: 300, height: 250}}
+              />
+            )}
+            horizontal
+          />
+          <CardText>{data.title}</CardText>
+        </>
+      )}
     </View>
   );
 };
