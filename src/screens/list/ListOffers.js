@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, ActivityIndicator, Text, FlatList} from 'react-native';
-import useFetch from '../../service/useFetch';
-import AppColors from '../../theme/colors';
+import {FlatList, Text, View} from 'react-native';
+import Loader from '../../components/Loader';
 import ProductItemCard from '../../components/ProductItemCard';
+import useFetch from '../../service/useFetch';
 
 const ListOffers = ({navigation}) => {
   const {data, isLoadding, error} = useFetch('offers');
@@ -10,11 +10,7 @@ const ListOffers = ({navigation}) => {
   return (
     <View>
       {error && <Text>{error.message}</Text>}
-      {isLoadding && (
-        <View>
-          <ActivityIndicator size="large" color={AppColors.light} />
-        </View>
-      )}
+      {isLoadding && <Loader />}
       <FlatList
         data={data}
         keyExtractor={item => item.id}
