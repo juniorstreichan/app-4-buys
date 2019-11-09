@@ -39,7 +39,7 @@ const OfferDetails = ({navigation}) => {
             <ValueText>R$ {data.price}</ValueText>
             <PayButton
               title="Pagar"
-              onPress={() => navigation.navigate('Checkout')}
+              onPress={() => navigation.navigate('Checkout', {offer: data})}
             />
           </DetailsContainer>
         </>
