@@ -1,9 +1,15 @@
 import React from 'react';
-import {FlatList, Image, View} from 'react-native';
+import {FlatList, Image, View, Text} from 'react-native';
 import Loader from '../../components/Loader';
 import useFetch from '../../service/useFetch';
 import AppColors from '../../theme/colors';
-import {DescriptionText, DetailsContainer, CategoryText} from './styles';
+import {
+  DescriptionText,
+  DetailsContainer,
+  CategoryText,
+  ValueText,
+  PayButton,
+} from './styles';
 
 const OfferDetails = ({navigation}) => {
   const offerId = navigation.state.params.id;
@@ -12,7 +18,7 @@ const OfferDetails = ({navigation}) => {
   return (
     <View>
       {isLoadding && <Loader />}
-
+      {error && <Text>{error.message}</Text>}
       {data && (
         <>
           <FlatList
@@ -22,14 +28,19 @@ const OfferDetails = ({navigation}) => {
             renderItem={({item}) => (
               <Image
                 source={{uri: item.url}}
-                style={{width: 300, height: 250}}
+                style={{width: 300, height: 220}}
               />
             )}
             horizontal
           />
           <DetailsContainer>
-            <CategoryText> {data.category}</CategoryText>
+            <CategoryText>{data.category}</CategoryText>
             <DescriptionText>{data.title}</DescriptionText>
+            <ValueText>R$ {data.price}</ValueText>
+            <PayButton
+              title="Pagar"
+              onPress={() => navigation.navigate('Checkout')}
+            />
           </DetailsContainer>
         </>
       )}

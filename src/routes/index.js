@@ -11,7 +11,7 @@ const Router = createAppContainer(
       List: {
         screen: ListOffers,
         navigationOptions: {
-          title: 'Opções',
+          title: 'Ofertas',
         },
       },
       Details: {
